@@ -1,3 +1,4 @@
+import { UPDATING } from '../actions';
 
 const initialState = {
     friends: [],
