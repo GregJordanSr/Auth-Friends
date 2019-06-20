@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { friendsReducer } from './reducers';
 
-const store = createStore(friendsReducer, applyMiddleWare(thunk, logger));
+const store = createStore(friendsReducer, applyMiddleware(thunk, logger));
 
 
 ReactDOM.render(
