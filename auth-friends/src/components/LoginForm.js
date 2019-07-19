@@ -1,6 +1,8 @@
 import React from 'react'
 import {withFormik, Form, Field} from 'formik'
 import * as Yup from 'yup';
+import axiosWithAuth from "./authConfig"
+
 
  const LoginForm = ({ touched, errors, isSubmitting, values }) => {
     return (
@@ -13,7 +15,7 @@ import * as Yup from 'yup';
                     type="text"
                     name="username"
                     placeholder="Username" 
-                    value={values.username}
+                    
                 />
             </div>
             <div className="login-group">
@@ -24,7 +26,7 @@ import * as Yup from 'yup';
                     type="password"
                     name="password"
                     placeholder="Password"
-                    value={values.password}
+                
                 />
             </div>
         </div>
@@ -43,10 +45,10 @@ import * as Yup from 'yup';
 }
 
 const FormikLoginForm = withFormik({
-    mapPropsToValues({ username, password }) {
+    mapPropsToValues() {
        return{
-        username: username || "",
-        password: password || ""
+        username: "Lambda School",
+        password: "i<3Lambd4"
        }; 
     },
 
@@ -55,7 +57,13 @@ const FormikLoginForm = withFormik({
         password: Yup.string().min(8, 'Password must be at least 8 characters').required('Password Required')
     }),
 
-    handleSubmit(values,{ resetForm }){
+    handleSubmit(values,formikBag){
+        const url = "/login"
+        return axiosWithAuth().post(url,values).then(res => {
+            localStorage.setItem("token", res.data.payload);
+            formikBag.props.history.push("/friends-list")
+            formikBag.resetForm()
+        })
 
     },
 
