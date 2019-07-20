@@ -16,9 +16,9 @@ import axiosWithAuth from './authConfig';
         <div>
          { friends.map((item,key) => (
             <div key={key}>
-              <p>{item.name} </p>
-              <p>{item.age} </p>
-              <p>{item.email} </p>
+                <p>{item.name} </p>
+                <p>{item.age} </p>
+                <p>{item.email} </p>
               
               </div>
           ))}

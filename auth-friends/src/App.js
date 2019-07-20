@@ -5,12 +5,12 @@ import {Route, Link, Redirect} from "react-router-dom"
 import './App.css';
 
 function App() {
-  const PrivateRoute = ({ component: FriendsList, ...rest }) => (
+  const PrivateRoute = ({ component: Component, ...rest }) => (
     <Route
       {...rest}
       render={props =>
         localStorage.getItem("token") ? (
-          <FriendsList {...props} />
+          <Component {...props} />
         ) : (
           <Redirect to="/login" />
         )
